@@ -332,3 +332,16 @@ strong,b{color:var(--rd-ink);font-weight:700}
 .page.page--booking{max-width:none!important;width:auto!important}
 @media (max-width:900px){.page.page--booking{max-width:none!important;width:auto!important}.zip-text.zip-text--closed:after{height:110px!important}}
 .page h1{font-size:38px!important;margin-bottom:22px!important}@media(max-width:900px){.page h1{font-size:26px!important}}
+
+/* ===== r4: баннер — не резать головы, мобилка влезает ===== */
+.main-slider .swiper-slide img{object-fit:cover!important;object-position:50% 22%!important}
+@media (max-width:900px){
+  .main-slider .swiper-slide{height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+  .main-slider .swiper-slide img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-position:50% 25%!important}
+  .main-slider .main-slider__content{position:relative!important;inset:auto!important;transform:none!important;height:auto!important;min-height:min(62svh,520px);padding:150px 0 24px!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important}
+  .main-slider .main-slider__content .main-slider__title,.main-slider .main-slider__title{font-size:28px!important;line-height:1.08!important;margin-bottom:16px!important;overflow-wrap:anywhere}
+  .main-slider .main-slider__cta{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important}
+  .main-slider .main-slider__cta .main-slider__link{height:44px!important;padding:0 8px!important;font-size:14px!important;justify-content:center!important;white-space:nowrap;width:auto!important}
+  .main-slider .main-slider__cta .main-slider__link:only-child{grid-column:1/3}
+}
+@media (max-width:370px){.main-slider .main-slider__title{font-size:25px!important}.main-slider .main-slider__cta .main-slider__link{font-size:13px!important}}
