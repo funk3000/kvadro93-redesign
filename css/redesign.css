@@ -406,3 +406,15 @@ html body .booking .datepicker-grid .datepicker-cell{width:auto!important;margin
 .booking .booking__description a{text-decoration:none!important;border-bottom:1px solid rgba(255,255,255,.6)!important;padding-bottom:1px;white-space:nowrap;background:none!important}
 .booking .booking__description p,.booking .booking__description{line-height:1.75!important}
 .booking .booking__description a:before,.booking .booking__description a:after{display:none!important}
+
+/* ===== r7: убрать «нейросетевой» вид, оставаясь как на видео (бежевый фон, жирные чёрные заголовки) ===== */
+.main-slider .main-slider__title,.main-slider .main-slider__content .main-slider__title{text-shadow:none!important}
+/* кнопки как на видео: прямоугольные с небольшим скруглением */
+.site-header__contacts a,.rd-phone,.zip-text .zip-text__more,#content section a{border-radius:6px!important}
+.main-slider .swiper-button-prev,.main-slider .swiper-button-next{background:transparent!important}
+/* без «парящих» теней и свечения */
+.booking .booking__body,.site-header .menu__dropdown{box-shadow:none!important}
+.site-header .menu__dropdown{border:1px solid #e3e3e3}
+.rd-tabbar{box-shadow:none!important;border-top:1px solid #e3e3e3}
+.rd-tabbar a.rd-tab--book span.rd-ic{box-shadow:none!important}
+.zip-text.zip-text--closed:after{border-radius:0!important}
