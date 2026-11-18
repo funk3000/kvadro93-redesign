@@ -31,3 +31,10 @@
   });
   document.body.appendChild(bar);
 })();
+// слайдер: пересчёт ширины после загрузки/ресайза, чтобы не застревал между слайдами
+(function(){
+  function fix(){var el=document.querySelector('.main-slider');var s=el&&el.swiper;if(s){s.update();s.slideToLoop(s.realIndex,0,false);}}
+  window.addEventListener('load',function(){setTimeout(fix,300)});
+  var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fix,200)});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)fix()});
+})();
