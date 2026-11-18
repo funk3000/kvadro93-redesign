@@ -377,3 +377,32 @@ html body .booking .datepicker-cell:not(.disabled):hover{background:#ecebe5!impo
 html body .booking .point__number{padding:0!important;height:30px!important;width:30px!important;max-width:30px;aspect-ratio:1/1;display:flex!important;align-items:center;justify-content:center;border-radius:50%!important;box-sizing:border-box}
 @media (max-width:900px){.booking .point__text{font-size:10px!important;white-space:nowrap;letter-spacing:-.01em}}
 html body .booking .booking__points .point__number{min-height:30px!important;max-height:30px!important;min-width:30px!important;line-height:1!important}
+
+/* ===== r6: правки по замечаниям 18.11 ===== */
+/* Экскурсии: цены целиком, высота как на видео */
+.pages-slider__grid{grid-template-rows:270px 270px!important}
+.pages-slider__grid .card__title .price{width:max-content!important;min-width:max-content!important;align-items:flex-end!important;overflow:visible!important}
+.pages-slider__grid .card__title .price .current,.pages-slider__grid .card__title .price .old{width:auto!important;min-width:max-content!important;display:block!important;text-align:right}
+/* кадрирование фото в мозаике */
+.pages-slider__grid .card:nth-child(1) img{object-position:50% 60%!important}
+.pages-slider__grid .card:nth-child(2) img{object-position:55% 45%!important}
+.pages-slider__grid .card:nth-child(3) img{object-position:72% 50%!important}
+.pages-slider__grid .card:nth-child(4) img{object-position:45% 40%!important}
+.pages-slider__grid .card:nth-child(5) img{object-position:38% 55%!important}
+/* бронирование: левая колонка по центру формы, без пустоты */
+.booking{display:flex!important;align-items:center!important;justify-content:space-between!important}
+.booking .booking__header{align-self:center!important}
+/* баннер: ровное затемнение сверху, без «белёсого» неба */
+.main-slider .swiper-slide:after{background:linear-gradient(90deg,rgba(10,18,12,.7) 0%,rgba(10,18,12,.35) 50%,rgba(10,18,12,.12) 100%),linear-gradient(0deg,rgba(10,18,12,.55),transparent 45%),linear-gradient(180deg,rgba(10,18,12,.35),transparent 30%)!important}
+/* спиннер лениво загружаемых картинок — тоньше и не поверх готового фото */
+.lazy-loading:before{width:34px!important;height:34px!important;margin:-17px 0 0 -17px!important;border-width:3px!important;opacity:.6}
+@media (max-width:900px){.booking{align-items:stretch!important}.pages-slider__grid{grid-template-rows:200px 150px 150px!important}}
+/* календарь на всю ширину карточки */
+html body .booking .days{width:100%!important}
+html body .booking .days-of-week,html body .booking .datepicker-grid{grid-template-columns:repeat(7,1fr)!important;width:100%!important}
+html body .booking .days-of-week .dow{width:auto!important}
+html body .booking .datepicker-grid .datepicker-cell{width:auto!important;margin:3px 5px!important}
+/* ссылки в тексте бронирования — без «зачёркивания» */
+.booking .booking__description a{text-decoration:none!important;border-bottom:1px solid rgba(255,255,255,.6)!important;padding-bottom:1px;white-space:nowrap;background:none!important}
+.booking .booking__description p,.booking .booking__description{line-height:1.75!important}
+.booking .booking__description a:before,.booking .booking__description a:after{display:none!important}
