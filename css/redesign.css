@@ -653,3 +653,4 @@ html body .page__grid.grid.rd-mosaic .card--news .card__title .price{flex:0 0 au
   html body .page__grid.grid.rd-mosaic.rd-mosaic--2,html body .page__grid.grid.rd-mosaic.rd-mosaic--3,html body .page__grid.grid.rd-mosaic.rd-mosaic--4,html body .page__grid.grid.rd-mosaic.rd-mosaic--5{grid-template-columns:1fr 1fr!important}
   html body #socialButtons,html body .social-buttons{display:none!important}
 }
+.rd-paren{white-space:nowrap}

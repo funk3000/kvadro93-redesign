@@ -141,3 +141,15 @@ if(document.readyState==='complete') run(); else window.addEventListener('load',
     else a.style.display='none';
   });
 })();
+
+// r23: уточнение в скобках в названии карточки — с новой строки ("Маршрут 1" / "(40-60 минут)")
+(function(){
+  document.querySelectorAll('.card__title span, .card__title, .pages-slider__grid a span, .card [class*="title"]').forEach(function(el){
+    if(el.children.length) return;
+    var m=el.textContent.match(/^\s*([^()]*\S)\s+(\([^()]+\))\s*$/);
+    if(!m) return;
+    el.textContent=m[1];
+    var s=document.createElement('span');s.className='rd-paren';s.textContent=m[2];
+    el.appendChild(document.createElement('br'));el.appendChild(s);
+  });
+})();
