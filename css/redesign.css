@@ -418,3 +418,122 @@ html body .booking .datepicker-grid .datepicker-cell{width:auto!important;margin
 .rd-tabbar{box-shadow:none!important;border-top:1px solid #e3e3e3}
 .rd-tabbar a.rd-tab--book span.rd-ic{box-shadow:none!important}
 .zip-text.zip-text--closed:after{border-radius:0!important}
+
+/* ===== r8: шапка прозрачная поверх баннера, при прокрутке — тёмно-зелёная (как на видео) ===== */
+.site-header{transition:background-color .3s ease}
+body.rd-overlay .site-header{background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0))!important;background-color:transparent!important}
+body.rd-overlay.rd-scrolled .site-header,body.rd-overlay.rd-menu-open .site-header{background:var(--rd-green)!important}
+body.rd-overlay .main-slider,body.rd-overlay .splash:not(.main-slider){margin-top:0!important}
+body.rd-overlay .site-header__wrapper{height:76px;min-height:76px}
+body.rd-overlay.rd-scrolled .site-header__wrapper{height:58px;min-height:58px}
+.site-header__wrapper{transition:height .3s ease,min-height .3s ease}
+@media (max-width:900px){
+  body.rd-overlay .site-header__wrapper,body.rd-overlay.rd-scrolled .site-header__wrapper{height:54px;min-height:54px}
+}
+/* спиннер ленивых картинок: виден только пока картинка грузится (в r6 он оставался поверх фото) */
+.lazy-loading:before,.lazy-loading:after{opacity:0!important}
+.lazy-loading.lazy-loading--active:before{opacity:.6!important}
+.lazy-loading.lazy-loading--active:after{opacity:.5!important}
+/* r8: стрелки слайдера — белые шевроны в кругах, как на видео (иконочный шрифт не грузился) */
+.main-slider .swiper-button-prev,.main-slider .swiper-button-next{width:52px!important;height:52px!important;border:1.5px solid rgba(255,255,255,.85)!important;background-color:transparent!important;background-repeat:no-repeat!important;background-position:center!important;background-size:20px 20px!important;opacity:1!important;cursor:pointer;transition:background-color .2s}
+.main-slider .swiper-button-prev:after,.main-slider .swiper-button-next:after{content:none!important;display:none!important}
+.main-slider .swiper-button-prev{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5l-7 7 7 7'/%3E%3C/svg%3E")!important;right:calc((100vw - min(var(--rd-w),100vw - 40px))/2 + 64px)!important}
+.main-slider .swiper-button-next{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E")!important}
+.main-slider .swiper-button-prev:hover,.main-slider .swiper-button-next:hover{background-color:rgba(255,255,255,.15)!important}
+.main-slider .swiper-button-disabled{opacity:.5!important}
+/* скрытый SEO-заголовок не должен просвечивать над прозрачной шапкой */
+body.rd-overlay .h1-nvisible{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;margin:-1px!important;padding:0!important}
+/* r8: кадрирование баннера — центральная часть картинки, а не небо */
+@media (min-width:901px){.main-slider .swiper-slide img{object-position:50% 42%!important}}
+
+/* ===== r9: боковое меню (бургер) в стиле редизайна ===== */
+.site-aside .site-aside__sidebar{background:var(--rd-green)!important;background-image:none!important;width:400px!important;max-width:100vw;transform:translateX(410px);padding:22px 36px 30px!important;color:#fff}
+.site-aside.site-aside--active .site-aside__sidebar{transform:translateX(0)}
+.site-aside .site-aside__backdrop{background:rgba(8,14,10,.55)!important}
+.site-aside .site-aside__burger button span{background:#fff!important}
+.site-aside .menu{margin:26px 0 0!important;padding:0!important;list-style:none}
+.site-aside .menu .menu__item{margin:0!important;padding:0!important;border-bottom:1px solid rgba(255,255,255,.12)}
+.site-aside .menu .menu__item:before{display:none!important}
+.site-aside .menu .menu__link,.site-aside .menu__link--dropdown{display:flex!important;align-items:center;justify-content:space-between;width:100%;padding:14px 0!important;color:#fff!important;-webkit-text-fill-color:#fff;font-size:19px!important;font-weight:800!important;letter-spacing:-.02em;text-transform:none!important;text-decoration:none;background:none!important;border:0!important}
+.site-aside .menu .menu__link:hover{color:#fff!important;opacity:.75}
+.site-aside .menu__link--dropdown svg,.site-aside .menu__link--dropdown .dropdown-arrow{stroke:#fff;fill:none;color:#fff}
+.site-aside .menu__dropdown{background:transparent!important;border:0!important;box-shadow:none!important;padding:0 0 10px!important;margin:0!important;position:static!important}
+.site-aside .menu__dropdown li{border:0!important;margin:0!important;padding:0!important}
+.site-aside .menu__dropdown li:before{display:none!important}
+.site-aside .menu__dropdown li a{display:block;padding:7px 0 7px 14px!important;color:rgba(255,255,255,.75)!important;-webkit-text-fill-color:rgba(255,255,255,.75);font-size:15px!important;font-weight:600!important;border-left:2px solid rgba(255,255,255,.15)!important;background:none!important}
+.site-aside .menu__dropdown li a:hover{color:#fff!important;-webkit-text-fill-color:#fff;border-left-color:var(--rd-red)!important}
+.site-aside .site-aside__phone{margin-top:28px!important}
+.site-aside .site-aside__phone a{display:flex!important;align-items:center;justify-content:center;height:48px;background:var(--rd-red)!important;color:#fff!important;-webkit-text-fill-color:#fff;border-radius:6px;font-size:17px!important;font-weight:800!important;text-decoration:none;margin:0 0 18px!important}
+.site-aside .site-aside__links{display:grid!important;grid-template-columns:1fr 1fr;gap:10px}
+.site-aside .site-aside__links>div{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid rgba(255,255,255,.18);border-radius:6px}
+.site-aside .site-aside__links a,.site-aside .site-aside__links span{color:#fff!important;-webkit-text-fill-color:#fff;font-size:14px!important;font-weight:600!important;text-decoration:none;margin:0!important}
+.site-aside .site-aside__links svg{flex:none;width:22px;height:22px;background:#fff;border-radius:50%;padding:1px}
+@media (max-width:500px){.site-aside .site-aside__sidebar{width:100vw!important;padding:18px 22px 90px!important}}
+
+/* ===== r10: один-в-один с видео ===== */
+/* цвета тёмных блоков по кадрам видео */
+:root{--rd-green:#0a1911;--rd-green-d:#0a1911}
+.site-header,body.rd-overlay.rd-scrolled .site-header,body.rd-overlay.rd-menu-open .site-header{background:#19201c!important}
+body.rd-overlay:not(.rd-scrolled):not(.rd-menu-open) .site-header{background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0))!important}
+.site-aside .site-aside__sidebar{background:#19201c!important}
+/* на видео: телефон и города — «пилюли», карточки и фото — со скруглением */
+.site-header__contacts a,.rd-phone,#content section a{border-radius:999px!important}
+.pages-slider__grid .card{border-radius:8px!important}
+.worker__image,.card--service .card__image,.page__grid .card--news .card__body>div:first-child{border-radius:8px!important}
+.zip-text,.wp-block-kvadro93-zip-text{border-radius:16px!important}
+.booking .booking__body{border-radius:16px!important}
+/* cookie-баннер — компактный */
+#cookie-banner{max-width:330px!important;padding:14px 16px!important;bottom:16px!important;right:16px!important;border-radius:10px!important;box-shadow:0 6px 20px rgba(0,0,0,.35)!important}
+#cookie-banner>div{gap:8px!important}
+#cookie-banner>div>div:first-child{font-size:14px!important}
+#cookie-banner>div>div:nth-child(2){font-size:11.5px!important;line-height:1.45!important}
+#cookie-banner button{padding:7px 10px!important;font-size:12px!important;border-radius:6px!important}
+@media (max-width:900px){#cookie-banner{left:10px!important;right:10px!important;width:auto!important;max-width:none!important;bottom:80px!important}}
+/* цена в большой карточке: старая цена над новой, как на видео */
+.pages-slider__grid .card__title .price{flex-direction:column!important}
+/* бронирование: колонки по верхнему краю, как на видео */
+.booking{align-items:flex-start!important}
+.booking .booking__header{align-self:flex-start!important;padding-top:6px}
+/* подвал: телефон и адрес выровнены влево */
+.site-footer .footer-phone,.site-footer .footer-address,.site-footer .footer-phone a,.site-footer .footer-address *{text-align:left!important;justify-content:flex-start!important}
+/* форма «Остались вопросы»: ссылки в согласии тёмные с подчёркиванием */
+.feedback .feedback-checkbox a,.feedback label a,.feedback__body a{color:var(--rd-ink)!important;text-decoration:underline!important;text-underline-offset:2px}
+/* подпись над баннером, как на видео (текст h1 страницы) */
+.rd-caption{position:absolute;z-index:20;top:96px;left:max(20px,calc((100vw - var(--rd-w))/2));right:20px;font-size:13px;font-weight:600;line-height:1.3;color:rgba(255,255,255,.75);pointer-events:none}
+@media (max-width:900px){.rd-caption{top:66px;left:14px;font-size:11.5px}
+  .site-footer .footer-phone,.site-footer .footer-address,.site-footer .footer-address *{text-align:center!important;justify-content:center!important;white-space:normal!important;max-width:100%}}
+/* r11: мобильная шапка — плавающая стеклянная панель */
+@media (max-width:900px){
+  html body .site-header{position:fixed!important;top:10px!important;left:10px!important;right:10px!important;width:auto!important;height:58px!important;min-height:0!important;padding:0!important;
+    background:rgba(19,32,26,.42)!important;-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid rgba(255,255,255,.14)!important;border-radius:20px!important;box-shadow:0 8px 28px rgba(0,0,0,.18)!important;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s,top .3s!important;z-index:1000!important}
+  html body.rd-scrolled .site-header,html body:not(.rd-overlay) .site-header{background:rgba(19,32,26,.88)!important}
+  html body.rd-hide-hdr .site-header{transform:translateY(-90px)!important}
+  html body .site-header .site-header__wrapper{display:flex!important;align-items:center!important;height:100%!important;padding:0 8px 0 14px!important;gap:8px!important;max-width:none!important;width:100%!important}
+  html body .site-header .site-header__logo{order:0;margin-right:auto!important;display:flex;align-items:center}
+  html body .site-header .site-header__logo img{height:38px!important;width:auto!important}
+  html body .site-header .site-header__menu,html body .site-header .site-header__hisun{display:none!important}
+  html body .site-header .site-header__contacts{order:2;display:flex!important;margin:0!important;padding:0!important}
+  html body .site-header .site-header__contacts a{display:flex!important;align-items:center;justify-content:center;width:42px!important;height:42px!important;padding:0!important;border:0!important;border-radius:14px!important;
+    background:#b81f2a!important;font-size:0!important;color:transparent!important;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z'/%3E%3C/svg%3E")!important;
+    background-repeat:no-repeat!important;background-position:center!important;background-size:20px!important}
+  html body .site-header .site-header__burger{order:3;display:flex!important;margin:0!important;padding:0!important}
+  html body .site-header #burger{position:relative!important;width:42px!important;height:42px!important;padding:0!important;margin:0!important;border-radius:14px!important;background:rgba(255,255,255,.12)!important;border:1px solid rgba(255,255,255,.16)!important;display:block!important}
+  html body .site-header #burger span{position:absolute!important;left:12px!important;width:18px!important;height:2px!important;border-radius:2px!important;background:#fff!important;margin:0!important;transition:transform .3s,opacity .2s,width .3s!important}
+  html body .site-header #burger span:nth-child(1){top:14px!important}
+  html body .site-header #burger span:nth-child(2){top:20px!important;width:12px!important}
+  html body .site-header #burger span:nth-child(3){top:26px!important}
+  html body .site-header #burger.active span:nth-child(1),html body .site-header #burger.is-active span:nth-child(1){transform:translateY(6px) rotate(45deg)!important}
+  html body .site-header #burger.active span:nth-child(2),html body .site-header #burger.is-active span:nth-child(2){opacity:0!important}
+  html body .site-header #burger.active span:nth-child(3),html body .site-header #burger.is-active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)!important}
+  html body:not(.rd-overlay) main.site-main{padding-top:80px!important}
+  .rd-caption{top:80px!important}
+}
+@media (max-width:900px){html body .call-button-fixed{display:none!important}}
+/* r12: блок предоплаты — без «коробки», редакционный стиль */
+html body .booking .alert--accent,html body .booking .alert{position:relative!important;background:none!important;border:0!important;border-top:1px solid rgba(255,255,255,.12)!important;border-radius:0!important;
+  padding:22px 0 0 58px!important;margin:30px 0 0!important;color:rgba(255,255,255,.72)!important;font-size:13.5px!important;line-height:1.6!important;max-width:440px}
+html body .booking .alert--accent::before,html body .booking .alert::before{content:"₽";position:absolute;left:0;top:22px;width:40px;height:40px;border-radius:50%;
+  background:#b81f2a;color:#fff;font-weight:800;font-size:18px;line-height:40px;text-align:center;box-shadow:0 0 0 6px rgba(184,31,42,.18)}

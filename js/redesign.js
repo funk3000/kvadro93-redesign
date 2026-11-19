@@ -38,3 +38,32 @@
   var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fix,200)});
   document.addEventListener('visibilitychange',function(){if(!document.hidden)fix()});
 })();
+// r8: шапка прозрачная на баннере, тёмно-зелёная после прокрутки
+(function(){
+  var b=document.body, h=document.querySelector('.site-header');
+  var hero=document.querySelector('.main-slider, .splash');
+  if(!h||!hero) return;
+  var top=hero.getBoundingClientRect().top+window.scrollY;
+  if(top>140) return; // баннер не в самом верху — оставляем сплошную шапку
+  b.classList.add('rd-overlay');
+  function upd(){ b.classList.toggle('rd-scrolled', window.scrollY>40); }
+  upd(); window.addEventListener('scroll',upd,{passive:true});
+  var bg=document.querySelector('#burger, .site-header__burger');
+  if(bg) bg.addEventListener('click',function(){ setTimeout(function(){ b.classList.toggle('rd-menu-open', !!document.querySelector('.site-header--open, .menu--open, .site-header__menu--open, body.menu-open, html.menu-open')); },50); });
+})();
+// r10: подпись над баннером главной (как на видео)
+(function(){
+  var s=document.querySelector('.main-slider'), h=document.querySelector('.h1-nvisible');
+  if(!s||!h||s.querySelector('.rd-caption')) return;
+  var c=document.createElement('div'); c.className='rd-caption'; c.textContent=h.textContent.trim(); s.appendChild(c);
+})();
+// r11: мобильная шапка прячется при прокрутке вниз и появляется при прокрутке вверх
+(function(){
+  var last=window.scrollY, b=document.body;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(window.innerWidth>900||document.querySelector('.site-aside.active,.site-aside.is-open')){last=y;return;}
+    if(y>120&&y>last+6) b.classList.add('rd-hide-hdr'); else if(y<last-6||y<120) b.classList.remove('rd-hide-hdr');
+    last=y;
+  },{passive:true});
+})();
