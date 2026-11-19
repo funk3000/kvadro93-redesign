@@ -67,7 +67,5 @@
     last=y;
   },{passive:true});
 })();
-// r13: рейтинг Яндекса в подвале, как на видео
-(function(){var a=document.querySelector('.site-footer .footer-address');if(!a||document.querySelector('.rd-rating'))return;
-var r=document.createElement('a');r.className='rd-rating';r.href='https://yandex.ru/maps/?text=%D0%9A%D0%B2%D0%B0%D0%B4%D1%80%D0%BE93%20%D0%93%D0%B5%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D0%B8%D0%BA';r.target='_blank';r.rel='noopener';
-r.innerHTML='5.0 <b>★★★★★</b> <span>Яндекс Карты</span>';a.insertAdjacentElement('afterend',r);})();
+// r15: на превью (github.io) капча Google не работает из-за домена ключа — скрываем, на kvadro93.ru она остаётся
+if(/github\.io$/.test(location.hostname)){var st=document.createElement('style');st.textContent='.g-recaptcha{display:none!important}';document.head.appendChild(st);}
