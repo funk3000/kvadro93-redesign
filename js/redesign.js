@@ -69,3 +69,27 @@
 })();
 // r15: на превью (github.io) капча Google не работает из-за домена ключа — скрываем, на kvadro93.ru она остаётся
 if(/github\.io$/.test(location.hostname)){var st=document.createElement('style');st.textContent='.g-recaptcha{display:none!important}';document.head.appendChild(st);}
+// r18: «Читать далее / Свернуть» для длинных текстов на всех страницах
+(function(){
+function zip(host,skipFirst){
+  if(!host||host.querySelector('.zip-text,.rd-zip'))return;
+  var kids=[].slice.call(host.children).filter(function(el){
+    return !(el.id==='booking'||el.querySelector&&el.querySelector('#booking,form,iframe')||/^(H1|OL|SCRIPT|STYLE)$/.test(el.tagName)&&skipFirst&&!el.dataset.rdKeep||el.classList.contains('breadcrumb'));
+  });
+  // первый заголовок текста оставляем видимым
+  if(!kids.length)return;
+  var w=document.createElement('div');w.className='rd-zip';
+  kids[0].parentNode.insertBefore(w,kids[0]);
+  kids.forEach(function(k){w.appendChild(k)});
+  if(w.scrollHeight<620){while(w.firstChild)host.insertBefore(w.firstChild,w);w.remove();return;}
+  w.classList.add('rd-zip--closed');
+  var b=document.createElement('button');b.type='button';b.className='rd-zip__btn';b.textContent='Читать далее';
+  w.parentNode.insertBefore(b,w.nextSibling);
+  b.addEventListener('click',function(){var c=w.classList.toggle('rd-zip--closed');b.textContent=c?'Читать далее':'Свернуть';if(c)w.scrollIntoView({behavior:'smooth',block:'start'});});
+}
+function run(){
+  document.querySelectorAll('.page__main').forEach(function(h){zip(h,false)});
+  document.querySelectorAll('.page.page--default').forEach(function(h){if(!h.querySelector('.page__main'))zip(h,true)});
+}
+if(document.readyState!=='loading')run();else document.addEventListener('DOMContentLoaded',run);
+})();

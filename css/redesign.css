@@ -574,3 +574,9 @@ html body .feedback .terms div,html body .feedback .terms a{font-size:13px!impor
 .subheader .breadcrumb__item:last-child span{color:rgba(255,255,255,.7)!important}
 /* фото в карточках: кадр сверху, чтобы не резать головы */
 .card__image,.card img{object-position:50% 25%}
+/* r18: сворачиваемый текст */
+.rd-zip{position:relative}
+.rd-zip--closed{max-height:440px;overflow:hidden}
+.rd-zip--closed:after{content:"";position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(180deg,rgba(245,244,237,0),#f5f4ed 85%);pointer-events:none}
+.rd-zip__btn{display:inline-block;margin:14px 0 30px;background:#151716;color:#fff;border:0;border-radius:999px;padding:11px 22px;font:700 13px/1 inherit;cursor:pointer}
+.rd-zip__btn:hover{background:#b81f2a}
