@@ -16,16 +16,16 @@
   };
   var bar=document.createElement('nav'); bar.className='rd-tabbar';
   var path=location.pathname.replace(P,'')||'/';
-  var items=[['home',P+'/','Главная',path==='/'],['tours',P+'/routes/','Экскурсии',path.indexOf('/routes')===0],
-    ['book','#booking','Бронь',false],['call','tel:+79892930093','Позвонить',false],['menu','#','Меню',false]];
+  ic.tg='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.5zM9.7 14.1l8.6-5.4c.4-.3.8-.1.5.2l-7.1 6.4-.3 3.1-1.7-4.3z"/></svg>';
+  ic.max='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3a9 9 0 0 0-9 9c0 1.7.5 3.4 1.4 4.8L3.5 21l4.4-1.1A9 9 0 1 0 12 3z"/><path d="M8 15.5V9l4 4 4-4v6.5" stroke-linejoin="round"/></svg>';
+  ic.call2='<svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1z"/></svg>';
+  var items=[['tours',P+'/routes/','Экскурсии',path.indexOf('/routes')===0],['tg','https://t.me/Kvadro093','Telegram',false],
+    ['book','tel:+79892930093','Позвонить',false],['max','https://max.ru/u/f9LHodD0cOKVnJrbNaiBYKaSkGXD50Hrnkpy2an6lYyEIKZ19aJoTVMYNNI','MAX',false],['menu','#','Меню',false]];
   items.forEach(function(it){
     var a=document.createElement('a'); a.href=it[1];
-    if(it[0]==='book'){a.className='rd-tab--book'; a.innerHTML='<span class="rd-ic">'+ic.book+'</span><b>'+it[2]+'</b>';}
+    if(it[0]==='tg'||it[0]==='max'){a.target='_blank';a.rel='nofollow noopener';}
+    if(it[0]==='book'){a.className='rd-tab--book'; a.innerHTML='<span class="rd-ic">'+ic.call2+'</span><b>'+it[2]+'</b>';}
     else {a.innerHTML=ic[it[0]]+'<span>'+it[2]+'</span>'; if(it[3]) a.className='is-active';}
-    if(it[0]==='book') a.addEventListener('click',function(e){
-      var b=document.querySelector('.booking, #booking, form[class*="booking"]');
-      if(b){e.preventDefault(); b.scrollIntoView({behavior:'smooth'});} else {a.href=P+'/routes/';}
-    });
     if(it[0]==='menu') a.addEventListener('click',function(e){e.preventDefault(); var bb=document.querySelector('.site-header__burger, .site-header__burger button'); if(bb) bb.click();});
     bar.appendChild(a);
   });
@@ -69,27 +69,75 @@
 })();
 // r15: на превью (github.io) капча Google не работает из-за домена ключа — скрываем, на kvadro93.ru она остаётся
 if(/github\.io$/.test(location.hostname)){var st=document.createElement('style');st.textContent='.g-recaptcha{display:none!important}';document.head.appendChild(st);}
-// r18: «Читать далее / Свернуть» для длинных текстов на всех страницах
+// r20: длинные тексты — панель «как на главной» (.zip-text) с «Читать далее... / Свернуть»
 (function(){
-function zip(host,skipFirst){
-  if(!host||host.querySelector('.zip-text,.rd-zip'))return;
-  var kids=[].slice.call(host.children).filter(function(el){
-    return !(el.id==='booking'||el.querySelector&&el.querySelector('#booking,form,iframe')||/^(H1|OL|SCRIPT|STYLE)$/.test(el.tagName)&&skipFirst&&!el.dataset.rdKeep||el.classList.contains('breadcrumb'));
+var TXT=/^(H2|H3|H4|H5|P|UL|BLOCKQUOTE|TABLE)$/;
+function isText(el){
+  if(el.tagName==='OL') return !el.classList.contains('breadcrumb');
+  if(!TXT.test(el.tagName)) return false;
+  if(el.querySelector('img,iframe,form,video')) return false;
+  return true;
+}
+function bind(z){
+  var old=z.querySelector(':scope>.zip-text__more'); if(old) old.remove();
+  if(z.scrollHeight<460){z.classList.remove('zip-text--closed');return;}
+  z.classList.add('zip-text--closed');
+  var b=document.createElement('button');b.type='button';b.className='zip-text__more';b.textContent='Читать далее...';
+  z.appendChild(b);
+  b.addEventListener('click',function(){
+    var c=z.classList.toggle('zip-text--closed');
+    b.textContent=c?'Читать далее...':'Свернуть';
+    if(c){var y=z.getBoundingClientRect().top+window.scrollY-90; window.scrollTo({top:y,behavior:'smooth'});}
   });
-  // первый заголовок текста оставляем видимым
-  if(!kids.length)return;
-  var w=document.createElement('div');w.className='rd-zip';
-  kids[0].parentNode.insertBefore(w,kids[0]);
-  kids.forEach(function(k){w.appendChild(k)});
-  if(w.scrollHeight<620){while(w.firstChild)host.insertBefore(w.firstChild,w);w.remove();return;}
-  w.classList.add('rd-zip--closed');
-  var b=document.createElement('button');b.type='button';b.className='rd-zip__btn';b.textContent='Читать далее';
-  w.parentNode.insertBefore(b,w.nextSibling);
-  b.addEventListener('click',function(){var c=w.classList.toggle('rd-zip--closed');b.textContent=c?'Читать далее':'Свернуть';if(c)w.scrollIntoView({behavior:'smooth',block:'start'});});
 }
 function run(){
-  document.querySelectorAll('.page__main').forEach(function(h){zip(h,false)});
-  document.querySelectorAll('.page.page--default').forEach(function(h){if(!h.querySelector('.page__main'))zip(h,true)});
+  document.querySelectorAll('.page.page--default').forEach(function(host){
+    if(host.querySelector('.zip-text')) return;
+    var runs=[],cur=[];
+    [].slice.call(host.children).forEach(function(el){
+      var empty=el.tagName==='P'&&!el.textContent.trim()&&!el.querySelector('*');
+      if(empty){ if(cur.length) cur.push(el); return; }
+      var promo=el.tagName==='H2'&&/лояльност/i.test(el.textContent);
+      if(promo){ if(cur.length) runs.push(cur); cur=[]; host.dataset.rdPromo=1; return; }
+      if(isText(el)&&!(cur.length===0&&el.previousElementSibling&&/лояльност/i.test((el.previousElementSibling.textContent||''))&&el.previousElementSibling.tagName==='H2')) cur.push(el); else { if(cur.length) runs.push(cur); cur=[]; }
+    });
+    if(cur.length) runs.push(cur);
+    runs.forEach(function(r){
+      while(r.length&&r[r.length-1].tagName==='P'&&!r[r.length-1].textContent.trim()) r.pop();
+      if(r.length<3) return;
+      var z=document.createElement('div'); z.className='wp-block-kvadro93-zip-text zip-text rd-zt';
+      r[0].parentNode.insertBefore(z,r[0]);
+      r.forEach(function(el){z.appendChild(el)});
+      var hs=z.querySelectorAll(':scope>h2');
+      if(r[0].tagName!=='H2') z.classList.add('rd-zt--noh');
+      for(var i=(r[0].tagName==='H2'?1:0);i<hs.length;i++) hs[i].classList.add('rd-sub');
+    });
+  });
+  document.querySelectorAll('.zip-text').forEach(bind);
 }
-if(document.readyState!=='loading')run();else document.addEventListener('DOMContentLoaded',run);
+if(document.readyState==='complete') run(); else window.addEventListener('load',run);
+})();
+// r19: рубрики — карточки мозаикой как на главной (кроме ленты новостей/блога)
+(function(){
+  if(/\/(news|blog)\//.test(location.pathname)) return;
+  if(document.querySelector('.pages-slider__grid')) return; // главная: список услуг остаётся компактным, как на видео
+  document.querySelectorAll('.page__grid.grid').forEach(function(g){
+    var n=g.querySelectorAll(':scope>.card--news').length;
+    if(n<2||n>16) return;
+    g.classList.add('rd-mosaic','rd-mosaic--'+Math.min(n,5));
+    if(n>5){var rem=(n-5)%4; if(rem){var cs=g.querySelectorAll(':scope>.card--news'); cs[cs.length-1].classList.add('rd-last-'+(5-rem));}}
+  });
+})();
+
+// r20: без WhatsApp — в меню вместо него MAX
+(function(){
+  document.querySelectorAll('.site-aside__whatsapp').forEach(function(d){
+    d.className='site-aside__max';
+    d.innerHTML='<a href="https://max.ru/u/f9LHodD0cOKVnJrbNaiBYKaSkGXD50Hrnkpy2an6lYyEIKZ19aJoTVMYNNI" target="_blank" rel="nofollow"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9c0 1.7.5 3.4 1.4 4.8L3.5 21l4.4-1.1A9 9 0 1 0 12 3z"/><path d="M8 15.5V9l4 4 4-4v6.5"/></svg><span>Написать в MAX</span></a>';
+  });
+  document.querySelectorAll('.site-aside__telegram a').forEach(function(a){a.href='https://t.me/Kvadro093';a.querySelector('span')&&(a.querySelector('span').textContent='Написать в Telegram');});
+  document.querySelectorAll('a[href*="wa.me"],a[href*="whatsapp"]').forEach(function(a){
+    if(a.closest('.zip-text,.page--default>p,.page--default li')) {a.href='https://t.me/Kvadro093';a.textContent='Telegram';}
+    else a.style.display='none';
+  });
 })();

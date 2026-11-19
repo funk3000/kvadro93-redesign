@@ -538,13 +538,13 @@ html body .booking .alert--accent,html body .booking .alert{position:relative!im
 html body .booking .alert--accent::before,html body .booking .alert::before{content:"₽";position:absolute;left:0;top:22px;width:40px;height:40px;border-radius:50%;
   background:#b81f2a;color:#fff;font-weight:800;font-size:18px;line-height:40px;text-align:center;box-shadow:0 0 0 6px rgba(184,31,42,.18)}
 /* r13: как на видео — услуги в светлых плашках, рейтинг в подвале */
-html body .page__grid .card.card--news{background:#ecebe3!important;border-radius:10px!important;padding:10px 12px!important;transition:background .2s!important}
-html body .page__grid .card.card--news:hover{background:#e4e2d8!important}
+html body .page__grid .card.card--news{background:transparent!important;border-radius:0!important;padding:0!important}
+
 .rd-rating{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:6px 12px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:12.5px;font-weight:700;color:#fff}
 .rd-rating b{color:#ffc93c;letter-spacing:1px;font-weight:400}.rd-rating span{opacity:.6;font-weight:500}
 @media (max-width:900px){.rd-rating{margin:14px auto 0}}
 /* r14: QR-код программы лояльности — компактная карточка */
-html body img[alt*="690c8eaa110ec"]{display:block!important;width:220px!important;max-width:60%!important;height:auto!important;margin:18px 0 24px!important;padding:14px!important;background:#fff!important;border-radius:16px!important;border:1px solid #e3e1d7!important}
+html body img[alt*="690c8eaa110ec"]{display:block!important;width:150px!important;max-width:40%!important;height:auto!important;margin:18px 0 24px!important;padding:14px!important;background:#fff!important;border-radius:16px!important;border:1px solid #e3e1d7!important}
 .rd-book-cta{margin:24px 0!important}
 .rd-book-btn{display:inline-flex!important;align-items:center;height:48px;padding:0 26px;border-radius:8px;background:#b81f2a;color:#fff!important;font-weight:700;text-decoration:none!important}
 html body #booking.page--booking{margin:32px 0!important}
@@ -574,9 +574,78 @@ html body .feedback .terms div,html body .feedback .terms a{font-size:13px!impor
 .subheader .breadcrumb__item:last-child span{color:rgba(255,255,255,.7)!important}
 /* фото в карточках: кадр сверху, чтобы не резать головы */
 .card__image,.card img{object-position:50% 25%}
-/* r18: сворачиваемый текст */
-.rd-zip{position:relative}
-.rd-zip--closed{max-height:440px;overflow:hidden}
-.rd-zip--closed:after{content:"";position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(180deg,rgba(245,244,237,0),#f5f4ed 85%);pointer-events:none}
-.rd-zip__btn{display:inline-block;margin:14px 0 30px;background:#151716;color:#fff;border:0;border-radius:999px;padding:11px 22px;font:700 13px/1 inherit;cursor:pointer}
-.rd-zip__btn:hover{background:#b81f2a}
+
+/* ===== r19: рубрики — мозаика как на главной (1 большая + маленькие) ===== */
+html body .page__grid.grid.rd-mosaic{grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-auto-rows:252px!important;gap:8px!important;border-top:0!important;padding:0!important;margin:24px 0 0!important}
+html body .page__grid.grid.rd-mosaic .card.card--news{padding:0!important;position:relative;margin:0!important;min-height:0!important;height:auto!important;border-radius:var(--rd-r)!important;overflow:hidden;background:#222!important;box-shadow:none!important;width:auto!important}
+html body .page__grid.grid.rd-mosaic .card--news:first-child{grid-column:span 2;grid-row:span 2}
+html body .page__grid.grid.rd-mosaic.rd-mosaic--3 {grid-template-columns:2.05fr 1fr!important}
+html body .page__grid.grid.rd-mosaic.rd-mosaic--3 .card--news:first-child{grid-column:auto}
+html body .page__grid.grid.rd-mosaic.rd-mosaic--2 .card--news:first-child{grid-row:span 1}
+html body .page__grid.grid.rd-mosaic.rd-mosaic--2{grid-auto-rows:320px!important}
+html body .page__grid.grid.rd-mosaic.rd-mosaic--4 .card--news:nth-child(4){grid-column:span 2}
+html body .page__grid.grid.rd-mosaic .card--news .card__body{position:relative!important;display:block!important;height:100%!important;padding:0!important;background:transparent!important;border:0!important}
+html body .page__grid.grid.rd-mosaic .card--news .card__body>div:first-child{position:absolute;inset:0;margin:0;width:auto!important;height:auto!important;border-radius:0!important;background:#222}
+html body .page__grid.grid.rd-mosaic .card--news .card__image,html body .page__grid.grid.rd-mosaic .card--news img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 30%!important;margin:0!important;transform:none!important;transition:transform .5s ease;border-radius:0!important}
+html body .page__grid.grid.rd-mosaic .card--news:hover img{transform:scale(1.04)!important}
+html body .page__grid.grid.rd-mosaic .card--news .card__body:after{content:""!important;display:block!important;position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.28) 40%,transparent 62%)!important;z-index:1}
+html body .page__grid.grid.rd-mosaic .card--news .card__title{position:absolute!important;left:0;right:0;bottom:0;z-index:2;display:flex!important;flex-direction:row!important;align-items:flex-end!important;justify-content:space-between!important;gap:10px;padding:0 16px 16px!important;margin:0!important;font-size:inherit!important}
+html body .page__grid.grid.rd-mosaic .card--news .card__title span:first-child{color:#fff!important;font-weight:900!important;font-size:18px!important;line-height:1.1!important;letter-spacing:-.02em;max-width:68%;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+html body .page__grid.grid.rd-mosaic .card--news:first-child .card__title{padding:0 22px 20px!important}
+html body .page__grid.grid.rd-mosaic .card--news:first-child .card__title span:first-child{font-size:30px!important;max-width:72%}
+html body .page__grid.grid.rd-mosaic .card--news .card__title .price{flex-direction:column-reverse;align-items:flex-end;line-height:1.05}
+html body .page__grid.grid.rd-mosaic .card--news .card__title .price .current{color:#fff!important;font-size:16px!important;font-weight:900!important;white-space:nowrap}
+html body .page__grid.grid.rd-mosaic .card--news:first-child .card__title .price .current{font-size:22px!important}
+html body .page__grid.grid.rd-mosaic .card--news .card__title .price .old{color:rgba(255,255,255,.7)!important}
+html body .page__grid.grid.rd-mosaic .card--news:hover .card__title span:first-child{color:#fff!important}
+html body .page__grid.grid.rd-mosaic .card--news .card__new{top:10px!important;left:10px!important}
+@media (max-width:900px){
+  html body .page__grid.grid.rd-mosaic,html body .page__grid.grid.rd-mosaichtml body .page__grid.grid.rd-mosaic.rd-mosaic--3{grid-template-columns:1fr 1fr!important;grid-auto-rows:150px!important;gap:6px!important}
+  html body .page__grid.grid.rd-mosaic .card--news:first-child{grid-column:1/3!important;grid-row:span 1!important;height:210px!important}
+  html body .page__grid.grid.rd-mosaic.rd-mosaic--4 .card--news:nth-child(4){grid-column:auto}
+  html body .page__grid.grid.rd-mosaic .card--news:last-child:nth-child(even){grid-column:1/3}
+  html body .page__grid.grid.rd-mosaic.rd-mosaic--2 .card--news:last-child{grid-column:1/3}
+  html body .page__grid.grid.rd-mosaic .card--news .card__title{flex-direction:column!important;align-items:flex-start!important;gap:3px;padding:0 10px 10px!important}
+  html body .page__grid.grid.rd-mosaic .card--news .card__title span:first-child{font-size:14.5px!important;max-width:100%}
+  html body .page__grid.grid.rd-mosaic .card--news .card__title .price{align-items:flex-start}
+  html body .page__grid.grid.rd-mosaic .card--news:first-child .card__title{flex-direction:row!important;align-items:flex-end!important;padding:0 14px 14px!important}
+  html body .page__grid.grid.rd-mosaic .card--news:first-child .card__title span:first-child{font-size:22px!important}
+}
+
+html body .page__grid.grid.rd-mosaic .card.card--news:hover{background:#222!important}
+/* ===== r20: текст разделов — панель как на главной ===== */
+.rd-zt.zip-text{position:relative}
+.rd-zt.zip-text--noh,.rd-zt.rd-zt--noh{grid-template-columns:1fr!important}
+.rd-zt.rd-zt--noh>*:not(.zip-text__more){grid-column:1!important}
+.zip-text>h2.rd-sub{grid-column:2!important;grid-row:auto!important;font-size:20px!important;margin:26px 0 10px!important;line-height:1.2!important}
+html body .page.page--default .zip-text>p,html body .page.page--default .zip-text li{font-size:13.5px!important;line-height:1.75!important;color:var(--rd-text)!important}
+html body .page.page--default .zip-text>p{margin:0 0 12px!important}
+html body .page.page--default .zip-text>ul{background:none!important;padding:0!important;margin:6px 0 14px!important}
+html body .page.page--default .zip-text h4{font-size:14px!important;margin:16px 0 6px!important}
+.zip-text:not(.zip-text--closed) .zip-text__more{display:inline-block!important;position:static!important;justify-self:start;margin-top:18px!important;grid-column:2}
+.rd-zt--noh:not(.zip-text--closed) .zip-text__more{grid-column:1}
+.zip-text__more{cursor:pointer}
+@media (max-width:900px){
+  .zip-text:not(.zip-text--closed) .zip-text__more{grid-column:1}
+  .zip-text>h2.rd-sub{grid-column:1!important;font-size:18px!important}
+}
+/* r20: шапка раздела — хлебные крошки без отступа, заголовок не наезжает на карточки */
+html body .page.page--default>.breadcrumb{padding:0!important;margin-left:0!important;justify-content:flex-start}
+html body .page.page--default>.breadcrumb li:first-child{padding-left:0!important;margin-left:0!important}
+.page__grid.grid.rd-mosaic{margin-bottom:10px!important}
+/* r20: мобильная панель — главная кнопка «Позвонить», мессенджеры; лишние плавающие кнопки скрыты */
+@media (max-width:900px){
+  .rd-tabbar a.rd-tab--book span.rd-ic{background:#1f9d55!important}
+  .rd-tabbar a.rd-tab--book b{color:#1f9d55!important}
+  html body .wappi-widget-container{display:none!important}
+}
+
+@media (max-width:900px){
+  html body .page__grid.grid.rd-mosaic{grid-template-rows:210px!important;grid-auto-rows:150px!important}
+  html body .page__grid.grid.rd-mosaic .card--news:first-child{grid-column:1/3!important;grid-row:auto!important;height:auto!important}
+  html body #booking.rd-inline{padding-left:22px!important;padding-right:22px!important}
+  html body #booking.rd-inline .booking__body{margin-top:26px!important}
+}
+html body .page__grid.grid.rd-mosaic .card--news .card__title span:first-child{flex:1 1 auto;min-width:0;max-width:none!important}
+html body .page__grid.grid.rd-mosaic .card--news .card__title .price{flex:0 0 auto}
+@media (min-width:901px){html body .page__grid.grid.rd-mosaic .card--news.rd-last-4{grid-column:span 4}html body .page__grid.grid.rd-mosaic .card--news.rd-last-3{grid-column:span 3}html body .page__grid.grid.rd-mosaic .card--news.rd-last-2{grid-column:span 2}}
