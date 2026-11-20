@@ -898,3 +898,12 @@ html body .booking .datepicker-grid .datepicker-cell{width:auto!important;height
 html body .booking .datepicker,html body .booking .datepicker-picker,html body .booking .datepicker-main{width:100%!important}
 html body .booking .datepicker-controls{margin-bottom:4px!important}
 }
+/* r31: нижнее меню — иконки на одной линии, не прыгают */
+@media (max-width:900px){
+html body .rd-tabbar{align-items:flex-end!important;height:62px!important;padding:0 4px calc(6px + env(safe-area-inset-bottom))!important;transform:translateZ(0);will-change:transform}
+html body .rd-tabbar a{flex:1 1 0!important;height:52px!important;justify-content:flex-end!important;gap:4px!important;padding:0!important;font-weight:400!important;font-size:10.5px!important;line-height:12px!important;cursor:pointer;-webkit-tap-highlight-color:transparent}
+html body .rd-tabbar a>svg,html body .rd-tabbar a>img{width:24px!important;height:24px!important;flex:none!important;display:block!important;margin:0!important}
+html body .rd-tabbar a>span,html body .rd-tabbar a>b{display:block;height:12px;line-height:12px!important;white-space:nowrap;font-weight:400!important}
+html body .rd-tabbar a.rd-tab--book span.rd-ic{width:46px!important;height:46px!important;margin:0 0 -2px!important;flex:none!important}
+html body .rd-tabbar a.rd-tab--book{height:68px!important}
+}

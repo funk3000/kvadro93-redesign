@@ -26,7 +26,7 @@
     if(it[0]==='tg'||it[0]==='max'){a.target='_blank';a.rel='nofollow noopener';}
     if(it[0]==='book'){a.className='rd-tab--book'; a.innerHTML='<span class="rd-ic">'+ic.call2+'</span><b>'+it[2]+'</b>';}
     else {a.innerHTML=ic[it[0]]+'<span>'+it[2]+'</span>'; if(it[3]) a.className='is-active';}
-    if(it[0]==='menu') a.addEventListener('click',function(e){e.preventDefault(); var bb=document.querySelector('.site-header__burger, .site-header__burger button'); if(bb) bb.click();});
+    if(it[0]==='menu') a.addEventListener('click',function(e){e.preventDefault(); var as=document.getElementById('aside'); var open=as&&(as.classList.contains('site-aside--active')); var bb=open?document.getElementById('burger-close'):document.getElementById('burger'); if(bb) bb.click(); else if(as) as.classList.toggle('site-aside--active');});
     bar.appendChild(a);
   });
   document.body.appendChild(bar);
