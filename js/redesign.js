@@ -17,7 +17,7 @@
   var bar=document.createElement('nav'); bar.className='rd-tabbar';
   var path=location.pathname.replace(P,'')||'/';
   ic.tg='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.5zM9.7 14.1l8.6-5.4c.4-.3.8-.1.5.2l-7.1 6.4-.3 3.1-1.7-4.3z"/></svg>';
-  ic.max='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3a9 9 0 0 0-9 9c0 1.7.5 3.4 1.4 4.8L3.5 21l4.4-1.1A9 9 0 1 0 12 3z"/><path d="M8 15.5V9l4 4 4-4v6.5" stroke-linejoin="round"/></svg>';
+  ic.max='<img src="/kvadro93-redesign/img/max.svg" alt="MAX" class="rd-max-ic" width="24" height="24">';
   ic.call2='<svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1z"/></svg>';
   var items=[['tours',P+'/routes/','Экскурсии',path.indexOf('/routes')===0],['tg','https://t.me/Kvadro093','Telegram',false],
     ['book','tel:+79892930093','Позвонить',false],['max','https://max.ru/u/f9LHodD0cOKVnJrbNaiBYKaSkGXD50Hrnkpy2an6lYyEIKZ19aJoTVMYNNI','MAX',false],['menu','#','Меню',false]];
@@ -133,7 +133,7 @@ if(document.readyState==='complete') run(); else window.addEventListener('load',
 (function(){
   document.querySelectorAll('.site-aside__whatsapp').forEach(function(d){
     d.className='site-aside__max';
-    d.innerHTML='<a href="https://max.ru/u/f9LHodD0cOKVnJrbNaiBYKaSkGXD50Hrnkpy2an6lYyEIKZ19aJoTVMYNNI" target="_blank" rel="nofollow"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9c0 1.7.5 3.4 1.4 4.8L3.5 21l4.4-1.1A9 9 0 1 0 12 3z"/><path d="M8 15.5V9l4 4 4-4v6.5"/></svg><span>Написать в MAX</span></a>';
+    d.innerHTML='<a href="https://max.ru/u/f9LHodD0cOKVnJrbNaiBYKaSkGXD50Hrnkpy2an6lYyEIKZ19aJoTVMYNNI" target="_blank" rel="nofollow"><img src="/kvadro93-redesign/img/max.svg" alt="MAX" class="rd-max-ic" width="24" height="24"><span>Написать в MAX</span></a>';
   });
   document.querySelectorAll('.site-aside__telegram a').forEach(function(a){a.href='https://t.me/Kvadro093';a.querySelector('span')&&(a.querySelector('span').textContent='Написать в Telegram');});
   document.querySelectorAll('a[href*="wa.me"],a[href*="whatsapp"]').forEach(function(a){
@@ -226,3 +226,4 @@ if(document.readyState==='complete') run(); else window.addEventListener('load',
     });
   });
 })();
+;(function(){if(/\/service\//.test(location.pathname))document.documentElement.classList.add("rd-service");document.addEventListener("DOMContentLoaded",function(){if(/\/service\//.test(location.pathname))document.body.classList.add("rd-service")})})();
