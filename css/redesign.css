@@ -907,3 +907,17 @@ html body .rd-tabbar a>span,html body .rd-tabbar a>b{display:block;height:12px;l
 html body .rd-tabbar a.rd-tab--book span.rd-ic{width:46px!important;height:46px!important;margin:0 0 -2px!important;flex:none!important}
 html body .rd-tabbar a.rd-tab--book{height:68px!important}
 }
+
+/* r32: баннеры — толстый Onest; компактные баннеры в мобильной версии */
+html body .main-slider .main-slider__title,html body .main-slider .main-slider__content .main-slider__title,html body .subheader h1,html body .pages-slider__grid .card__title>span:first-child,html body .pages-slider__grid .card__title .price .current{font-family:'Onest',Arial,sans-serif!important;font-weight:900!important;letter-spacing:-.02em!important}
+@media (max-width:767px){
+html body .pages-slider{padding:40px 0 6px!important}
+html body .pages-slider__grid{grid-template-columns:1fr 1fr!important;grid-template-rows:none!important;grid-auto-rows:118px!important;gap:6px!important}
+html body .pages-slider__grid .card:first-child{grid-row:auto!important;grid-column:1/3!important}
+html body .pages-slider__grid .card__title{padding:0 10px 9px!important;flex-direction:column!important;align-items:flex-start!important;gap:3px}
+html body .pages-slider__grid .card__title>span:first-child{font-size:14px!important;max-width:100%!important}
+html body .pages-slider__grid .card:first-child .card__title>span:first-child{font-size:20px!important}
+html body .pages-slider__grid .card__title .price{align-items:flex-start!important;flex-direction:row-reverse!important;gap:6px}
+html body .pages-slider__grid .card__title .price .current,html body .pages-slider__grid .card:first-child .card__title .price .current{font-size:13px!important}
+html body .pages-slider__grid .card__title .price .old{font-size:11px!important}
+}
