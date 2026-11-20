@@ -881,3 +881,20 @@ html body .site-aside__links svg,html body .site-aside__links img{width:22px!imp
 .main-slider .main-slider__title,.main-slider .main-slider__content .main-slider__title,.subheader h1{font-family:"RFDewiExpanded",Onest,sans-serif!important;font-weight:800!important;letter-spacing:0!important;line-height:1.05!important}
 .main-slider .main-slider__title{font-size:clamp(34px,4vw,60px)!important}
 html body .site-aside .site-aside__links div a,html body .site-aside .site-aside__links div a *{font-weight:400!important;font-family:Onest,sans-serif!important}
+/* r28: плашка предоплаты — прозрачное «стекло» */
+html body .booking .alert,html body .booking .alert.alert--accent{background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03))!important;-webkit-backdrop-filter:blur(14px) saturate(140%)!important;backdrop-filter:blur(14px) saturate(140%)!important;border:1px solid rgba(255,255,255,.16)!important;border-left:1px solid rgba(255,255,255,.16)!important;border-radius:14px!important;box-shadow:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.12)!important;padding:16px 20px!important}
+/* r29: тексты и заголовки — по левому краю, шире (баннеры не трогаем) */
+html body .page.page--default>:is(h1,h2,h3,h4,p,ul,ol,.alert,.rd-rt,.zip-text,.wp-block-kvadro93-zip-text),html body .page.page--default>h2.has-text-align-center{max-width:none!important;width:auto!important;margin-left:0!important;margin-right:0!important;text-align:left!important}
+html body .page.page--default>.breadcrumb{justify-content:flex-start!important;text-align:left!important;margin-left:0!important}
+html body .page :is(h2,h3,h4,p).has-text-align-center{text-align:left!important}
+html body .page section>div[style*="text-align: center"]{text-align:left!important;max-width:none!important}
+html body .page section>div[style*="text-align: center"]>div[style*="justify-content: center"]{justify-content:flex-start!important}
+/* r30: форма брони шире и ниже */
+@media (min-width:901px){
+html body .booking .booking__body{max-width:640px!important;width:56%!important;padding:18px 24px 14px!important}
+html body .booking .days-of-week,html body .booking .datepicker-grid{display:grid!important;grid-template-columns:repeat(7,1fr)!important;width:100%!important}
+html body .booking .days-of-week .dow{width:auto!important;height:22px!important;line-height:22px!important}
+html body .booking .datepicker-grid .datepicker-cell{width:auto!important;height:28px!important;line-height:28px!important;margin:1px 3px!important}
+html body .booking .datepicker,html body .booking .datepicker-picker,html body .booking .datepicker-main{width:100%!important}
+html body .booking .datepicker-controls{margin-bottom:4px!important}
+}
