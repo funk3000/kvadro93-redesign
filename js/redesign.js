@@ -153,3 +153,76 @@ if(document.readyState==='complete') run(); else window.addEventListener('load',
     el.appendChild(document.createElement('br'));el.appendChild(s);
   });
 })();
+
+/* ===== r24 ===== */
+(function(){
+  var BASE='/kvadro93-redesign/';
+  function ready(f){document.readyState!=='loading'?f():document.addEventListener('DOMContentLoaded',f)}
+  function src(img){return img.getAttribute('data-normal')||img.getAttribute('src')}
+  ready(function(){
+    var page=document.querySelector('.page.page--default')||document.querySelector('.page');
+    /* битая картинка «Защитная экипировка» (на kvadro93.ru файл пустой) */
+    document.querySelectorAll('img[data-normal*="6f4ca501a550869b"]').forEach(function(i){var u='https://kvadro93.ru/_arch/ecfa4767bb9d.jpg';i.setAttribute('data-normal',u);i.src=u});
+
+    /* слайдеры -> мозаика; пустые слайдеры убираем */
+    var shows=[].slice.call(document.querySelectorAll('.page .wp-block-kvadro93-slideshow'));
+    var groups=[],cur=null,prev=null;
+    shows.forEach(function(s){
+      var imgs=[].slice.call(s.querySelectorAll('img'));
+      if(!imgs.length){s.remove();return}
+      var el=s.previousElementSibling;
+      if(cur&&prev&&el===prev){cur.imgs=cur.imgs.concat(imgs);cur.nodes.push(s)}else{cur={imgs:imgs.slice(),nodes:[s]};groups.push(cur)}
+      prev=s;
+    });
+    groups.forEach(function(g){
+      var n=Math.min(g.imgs.length,9),gal=document.createElement('div');
+      gal.className='rd-gal rd-gal--'+(n>4?'n':n);
+      g.imgs.slice(0,n).forEach(function(i){var a=document.createElement('a');a.href=src(i);a.target='_blank';var im=document.createElement('img');im.loading='lazy';im.src=src(i);im.alt='';a.appendChild(im);gal.appendChild(a)});
+      g.nodes[0].parentNode.insertBefore(gal,g.nodes[0]);g.nodes.forEach(function(x){x.remove()});
+    });
+
+    /* программа лояльности: QR справа */
+    document.querySelectorAll('img[alt*="690c8eaa110ec"]').forEach(function(qr){
+      var host=qr.parentElement; var start=qr;
+      while(start.previousElementSibling){start=start.previousElementSibling;if(start.tagName==='H2'&&/лояльности/i.test(start.textContent))break}
+      if(!(start.tagName==='H2'))return;
+      var box=document.createElement('div');box.className='rd-loyal';
+      start.parentNode.insertBefore(box,start);
+      var n=start;while(n){var nx=n.nextElementSibling;box.appendChild(n);if(n===qr)break;n=nx}
+      qr.classList.add('rd-qr');qr.src=src(qr);
+      var cap=document.createElement('div');cap.className='rd-qr-cap';cap.textContent='Наведите камеру телефона';box.appendChild(cap);
+      cap.style.gridRow='7';
+    });
+
+    /* Rutube-плейлисты карточками */
+    var pls=[].slice.call(document.querySelectorAll('.rutube-playlist'));
+    if(pls.length){
+      fetch(BASE+'js/rutube.json?v=r24').then(function(r){return r.json()}).then(function(db){
+        pls.forEach(function(p){
+          var l=p.querySelector('.rutube-playlist__link'),v=l&&l.value,m=v&&v.match(/plst\/(\d+)/);
+          var list=m&&db[m[1]];
+          if(!list||!list.length){p.remove();return}
+          var w=document.createElement('div');w.className='rd-rt';var g=document.createElement('div');g.className='rd-rt__grid';
+          list.slice(0,8).forEach(function(x){
+            var a=document.createElement('a');a.className='rd-rt__card';a.href='https://rutube.ru/video/'+x.id+'/';a.target='_blank';a.rel='noopener';
+            var d=x.d?Math.floor(x.d/60)+':'+('0'+x.d%60).slice(-2):'';
+            a.innerHTML='<div class="rd-rt__thumb"><img loading="lazy" src="'+x.img+'" alt="">'+(d?'<span class="rd-rt__dur">'+d+'</span>':'')+'</div><div class="rd-rt__t"></div>';
+            a.querySelector('.rd-rt__t').textContent=x.t;g.appendChild(a);
+          });
+          w.appendChild(g);
+          if(list.length>8){var mo=document.createElement('a');mo.className='rd-rt__more';mo.href=v;mo.target='_blank';mo.textContent='Все видео ('+list.length+') на Rutube →';w.appendChild(mo)}
+          p.parentNode.replaceChild(w,p);
+        });
+      }).catch(function(){});
+    }
+
+    /* YouTube: превью вместо пустого места */
+    document.querySelectorAll('.wp-block-embed-youtube').forEach(function(f){
+      var t=f.textContent.trim(),m=t.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);if(!m)return;
+      var id=m[1],d=document.createElement('div');d.className='rd-yt';
+      d.innerHTML='<img src="https://img.youtube.com/vi/'+id+'/hqdefault.jpg" alt="Видео">';
+      d.addEventListener('click',function(){d.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>'});
+      f.parentNode.replaceChild(d,f);
+    });
+  });
+})();
